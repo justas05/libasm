@@ -14,6 +14,7 @@ global ft_strdup
 extern malloc
 extern ft_strlen
 extern ft_strcpy
+extern __errno_location
 
 section .text
 
@@ -22,8 +23,11 @@ ft_strdup:
 	call	ft_strlen
 	mov		rdi, rax
 	inc		rdi
-	call	malloc
+	call	malloc WRT ..plt
+	test	rax, rax
 	pop		rsi
+	jz		err
 	mov		rdi, rax
 	call	ft_strcpy
+err:
 	ret

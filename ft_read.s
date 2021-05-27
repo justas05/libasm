@@ -11,10 +11,20 @@
 ; ************************************************************************** ;
 
 global ft_read
+extern __errno_location
 
 section .text
 
 ft_read:
-	mov		eax, 0x0
+	mov		rax, 0x0
 	syscall
+	cmp		rax, 0
+	jl		err
+	ret
+err:
+	neg		rax
+	mov		rdi, rax
+	call	__errno_location WRT ..plt
+	mov		[rax], rdi
+	mov		rax, -1
 	ret

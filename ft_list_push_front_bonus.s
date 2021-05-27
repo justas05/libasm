@@ -1,7 +1,7 @@
 ; ************************************************************************** ;
 ;                                                                            ;
 ;                                                        :::      ::::::::   ;
-;   ft_write.s                                         :+:      :+:    :+:   ;
+;   ft_list_push_front_bonus.s                         :+:      :+:    :+:   ;
 ;                                                    +:+ +:+         +:+     ;
 ;   By: hbooke <marvin@42.fr>                      +#+  +:+       +#+        ;
 ;                                                +#+#+#+#+#+   +#+           ;
@@ -10,21 +10,25 @@
 ;                                                                            ;
 ; ************************************************************************** ;
 
-global ft_write
-extern __errno_location
+global ft_list_push_front
 
 section .text
+extern malloc
 
-ft_write:
-	mov		rax, 0x1
-	syscall
-	cmp		rax, 0
-	jl		err
-	ret
-err:
-	neg		rax
-	mov		rdi, rax
-	call	__errno_location WRT ..plt
-	mov		[rax], rdi
-	mov		rax, -1
+ft_list_push_front:
+	test	rdi, rdi
+	jz		out
+	push	rdi
+	push	rsi
+	mov		rdi, 10h
+	call	malloc WRT ..plt
+	test	rax, rax
+	jz		out
+	pop		rsi
+	pop		rdi
+	mov		[rax], rsi
+	mov		rsi, [rdi]
+	mov		[rax + 8], rsi
+	mov		[rdi], rax
+out:
 	ret

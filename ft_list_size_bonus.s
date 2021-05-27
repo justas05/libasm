@@ -1,7 +1,7 @@
 ; ************************************************************************** ;
 ;                                                                            ;
 ;                                                        :::      ::::::::   ;
-;   ft_write.s                                         :+:      :+:    :+:   ;
+;   ft_list_size.s                                     :+:      :+:    :+:   ;
 ;                                                    +:+ +:+         +:+     ;
 ;   By: hbooke <marvin@42.fr>                      +#+  +:+       +#+        ;
 ;                                                +#+#+#+#+#+   +#+           ;
@@ -10,21 +10,17 @@
 ;                                                                            ;
 ; ************************************************************************** ;
 
-global ft_write
-extern __errno_location
+global ft_list_size
 
 section .text
 
-ft_write:
-	mov		rax, 0x1
-	syscall
-	cmp		rax, 0
-	jl		err
-	ret
-err:
-	neg		rax
-	mov		rdi, rax
-	call	__errno_location WRT ..plt
-	mov		[rax], rdi
-	mov		rax, -1
+ft_list_size:
+	xor		rax, rax
+loop:
+	test	rdi, rdi
+	jz		out
+	mov		rdi, [rdi + 8]
+	inc		rax
+	jmp		loop
+out:
 	ret
