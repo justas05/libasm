@@ -6,7 +6,7 @@
 #    By: hbooke <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/09 12:48:03 by hbooke            #+#    #+#              #
-#    Updated: 2021/05/27 11:27:39 by hbooke           ###   ########.fr        #
+#    Updated: 2021/05/27 13:48:22 by hbooke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCS=ft_strlen.s	\
 	ft_write.s		\
 	ft_read.s		\
 	ft_strdup.s
-BONUS_SRCS=ft_atoi_base_bonus.s			\
-			ft_list_push_front_bonus.s	\
+BONUS_SRCS=ft_list_push_front_bonus.s	\
 			ft_list_size_bonus.s		\
 			ft_list_sort_bonus.s		\
 			ft_list_remove_if_bonus.s
